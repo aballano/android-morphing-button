@@ -10,6 +10,8 @@
     <color name="mb_red">#ffff4444</color>
     <color name="mb_red_dark">#ffcd3a3a</color>
     <color name="mb_gray">#ffdedede</color>
+    <color name="mb_black">#ff000000</color>
+    <color name="mb_black_50">#80000000</color>
 
     <color name="holo_blue_bright">#ff00ddff</color>
     <color name="holo_green_light">#ff99cc00</color>

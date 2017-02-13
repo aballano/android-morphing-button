@@ -5,18 +5,16 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
-import android.os.Build;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
 import android.util.StateSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
-public class MorphingButton extends Button {
+public class MorphingButton extends AppCompatButton {
 
     private Padding mPadding;
     private int mHeight;
@@ -87,19 +85,19 @@ public class MorphingButton extends Button {
         setPadding(mPadding.left, mPadding.top, mPadding.right, mPadding.bottom);
 
         MorphingAnimation.Params animationParams = MorphingAnimation.Params.create(this)
-                .color(mColor, params.color)
-                .cornerRadius(mCornerRadius, params.cornerRadius)
-                .strokeWidth(mStrokeWidth, params.strokeWidth)
-                .strokeColor(mStrokeColor, params.strokeColor)
-                .height(getHeight(), params.height)
-                .width(getWidth(), params.width)
-                .duration(params.duration)
-                .listener(new MorphingAnimation.Listener() {
-                    @Override
-                    public void onAnimationEnd() {
-                        finalizeMorphing(params);
-                    }
-                });
+              .color(mColor, params.color)
+              .cornerRadius(mCornerRadius, params.cornerRadius)
+              .strokeWidth(mStrokeWidth, params.strokeWidth)
+              .strokeColor(mStrokeColor, params.strokeColor)
+              .height(getHeight(), params.height)
+              .width(getWidth(), params.width)
+              .duration(params.duration)
+              .listener(new MorphingAnimation.Listener() {
+                  @Override
+                  public void onAnimationEnd() {
+                      finalizeMorphing(params);
+                  }
+              });
 
         MorphingAnimation animation = new MorphingAnimation(animationParams);
         animation.start();
@@ -111,7 +109,7 @@ public class MorphingButton extends Button {
         mDrawableNormal.setStrokeColor(params.strokeColor);
         mDrawableNormal.setStrokeWidth(params.strokeWidth);
 
-        if(params.width != 0 && params.height !=0) {
+        if (params.width != 0 && params.height != 0) {
             ViewGroup.LayoutParams layoutParams = getLayoutParams();
             layoutParams.width = params.width;
             layoutParams.height = params.height;
@@ -129,7 +127,7 @@ public class MorphingButton extends Button {
             setText(params.text);
         } else if (params.icon != 0) {
             setIcon(params.icon);
-        } else if(params.text != null) {
+        } else if (params.text != null) {
             setText(params.text);
         }
 
@@ -164,7 +162,7 @@ public class MorphingButton extends Button {
         mPadding.bottom = getPaddingBottom();
 
         Resources resources = getResources();
-        int cornerRadius = (int) resources.getDimension(R.dimen.mb_corner_radius_2);
+        int cornerRadius = resources.getDimensionPixelSize(R.dimen.mb_corner_radius_2);
         int blue = resources.getColor(R.color.mb_blue);
         int blueDark = resources.getColor(R.color.mb_blue_dark);
 
@@ -179,7 +177,7 @@ public class MorphingButton extends Button {
         background.addState(new int[]{android.R.attr.state_pressed}, mDrawablePressed.getGradientDrawable());
         background.addState(StateSet.WILD_CARD, mDrawableNormal.getGradientDrawable());
 
-        setBackgroundCompat(background);
+        setBackground(background);
     }
 
     private StrokeGradientDrawable createDrawable(int color, int cornerRadius, int strokeWidth) {
@@ -191,15 +189,6 @@ public class MorphingButton extends Button {
         drawable.setStrokeWidth(strokeWidth);
 
         return drawable;
-    }
-
-    @SuppressWarnings("deprecation")
-    private void setBackgroundCompat(@Nullable Drawable drawable) {
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN) {
-            setBackgroundDrawable(drawable);
-        } else {
-            setBackground(drawable);
-        }
     }
 
     public void setIcon(@DrawableRes final int icon) {
@@ -226,7 +215,7 @@ public class MorphingButton extends Button {
         public int bottom;
     }
 
-    public static class Params {
+    public static final class Params {
         private int cornerRadius;
         private int width;
         private int height;
@@ -239,9 +228,7 @@ public class MorphingButton extends Button {
         private String text;
         private MorphingAnimation.Listener animationListener;
 
-        private Params() {
-
-        }
+        private Params() { }
 
         public static Params create() {
             return new Params();

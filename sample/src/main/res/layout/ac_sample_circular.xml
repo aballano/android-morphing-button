@@ -1,0 +1,28 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context="${relativePackage}.${activityClass}">
+
+    <com.dd.morphingbutton.impl.CircularProgressButton
+        android:id="@+id/btnMorph1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:maxHeight="200dp"
+        android:textColor="@color/mb_white"
+        android:padding="0dp"/>
+
+    <com.dd.morphingbutton.impl.CircularProgressButton
+        android:id="@+id/btnMorph2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:maxHeight="200dp"
+        android:textColor="@color/mb_white" />
+
+
+</LinearLayout>
